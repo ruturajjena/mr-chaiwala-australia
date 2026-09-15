@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en-AU" class="bg-[#090909]">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#090909" />
+    <meta name="color-scheme" content="dark" />
+
+    <title>Menu — Mr. Chaiwala | Chai, Street Food &amp; Pav Bhaji in Hindmarsh, Adelaide</title>
+    <meta
+      name="description"
+      content="The full Mr. Chaiwala menu: chai, shakes, vada pav, premium sandwiches, pav bhaji, Maggi, chaat, kulfi and more. 164 Port Road, Hindmarsh. Open 6 PM – 5 AM."
+    />
+    <link rel="canonical" href="https://mrchaiwala.com.au/menu/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="The Menu — Mr. Chaiwala" />
+    <meta property="og:description" content="Chai, Mumbai street food, pav bhaji, Maggi, chaat and kulfi. Open 6 PM – 5 AM in Hindmarsh." />
+    <meta property="og:image" content="https://mrchaiwala.com.au/og.jpg" />
+    <meta property="og:url" content="https://mrchaiwala.com.au/menu/" />
+    <meta property="og:locale" content="en_AU" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Cross-page cross-fade (home ↔ /menu/). Declared inline so the opt-in
+         exists at the instant the new page is revealed; in a stylesheet loaded
+         later, Chrome finds no opt-in and aborts the transition with an error.
+         The script swallows the promise rejections of any transition that is
+         legitimately skipped (hidden tab, a second click mid-fade): a skipped
+         fade is a normal page load, not a failure. -->
+    <style>
+      @view-transition { navigation: auto; }
+      @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
+    </style>
+    <script>
+      (function () {
+        function settle(vt) {
+          if (!vt) return;
+          [vt.ready, vt.finished, vt.updateCallbackDone].forEach(function (p) { if (p) p.catch(function () {}); });
+        }
+        addEventListener('pageswap', function (e) { settle(e.viewTransition); });
+        addEventListener('pagereveal', function (e) { settle(e.viewTransition); });
+      })();
+    </script>
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/cormorant-garamond.var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/manrope.var.woff2" as="font" type="font/woff2" crossorigin />
+
+    <style>
+      html, body { margin: 0; background: #090909; }
+      #root { min-height: 100vh; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <div style="padding:4rem 1.5rem;color:#F7EAD7;font-family:system-ui,sans-serif;max-width:44rem">
+        <h1 style="font-weight:300;font-size:2rem">Mr. Chaiwala — Menu</h1>
+        <p>164 Port Road, Hindmarsh SA 5007 · 0422 372 222</p>
+        <p>Open every night, 6:00 PM — 5:00 AM.</p>
+      </div>
+    </noscript>
+    <script type="module" src="/src/menu.tsx"></script>
+  </body>
+</html>

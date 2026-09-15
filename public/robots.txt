@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mrchaiwala.com.au/sitemap.xml

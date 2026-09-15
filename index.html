@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en-AU" class="bg-[#090909]">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#090909" />
+    <meta name="color-scheme" content="dark" />
+
+    <title>Mr. Chaiwala — Chai &amp; Indian Street Food | Hindmarsh, Adelaide</title>
+    <meta
+      name="description"
+      content="Authentic Indian chai and street food at 164 Port Road, Hindmarsh, Adelaide. Open every night 6:00 PM to 5:00 AM. Made to order."
+    />
+    <link rel="canonical" href="https://mrchaiwala.com.au/" />
+
+    <meta property="og:type" content="restaurant" />
+    <meta property="og:title" content="Mr. Chaiwala — Ek Chai Ho Jaye" />
+    <meta
+      property="og:description"
+      content="Chai, Mumbai street food, pav bhaji and chaat in Hindmarsh, Adelaide. Open every night 6 PM – 5 AM."
+    />
+    <meta property="og:image" content="https://mrchaiwala.com.au/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://mrchaiwala.com.au/" />
+    <meta property="og:locale" content="en_AU" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://mrchaiwala.com.au/og.jpg" />
+
+    <!-- Cross-page cross-fade (home ↔ /menu/). Declared inline so the opt-in
+         exists at the instant the new page is revealed; in a stylesheet loaded
+         later, Chrome finds no opt-in and aborts the transition with an error.
+         The script swallows the promise rejections of any transition that is
+         legitimately skipped (hidden tab, a second click mid-fade): a skipped
+         fade is a normal page load, not a failure. -->
+    <style>
+      @view-transition { navigation: auto; }
+      @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
+    </style>
+    <script>
+      (function () {
+        function settle(vt) {
+          if (!vt) return;
+          [vt.ready, vt.finished, vt.updateCallbackDone].forEach(function (p) { if (p) p.catch(function () {}); });
+        }
+        addEventListener('pageswap', function (e) { settle(e.viewTransition); });
+        addEventListener('pagereveal', function (e) { settle(e.viewTransition); });
+      })();
+    </script>
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- The two faces that render above the fold. The other two load on demand. -->
+    <link rel="preload" href="/fonts/cormorant-garamond.var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/manrope.var.woff2" as="font" type="font/woff2" crossorigin />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "Mr. Chaiwala",
+        "slogan": "Ek Chai Ho Jaye",
+        "url": "https://mrchaiwala.com.au/",
+        "menu": "https://mrchaiwala.com.au/menu/",
+        "servesCuisine": ["Indian", "Indian Street Food", "Cafe"],
+        "priceRange": "$",
+        "image": "https://mrchaiwala.com.au/og.jpg",
+        "telephone": "+61 422 372 222",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "164 Port Road",
+          "addressLocality": "Hindmarsh",
+          "addressRegion": "SA",
+          "postalCode": "5007",
+          "addressCountry": "AU"
+        },
+        "sameAs": [
+          "https://www.instagram.com/mr.chaiwala_adelaide",
+          "https://www.facebook.com/profile.php?id=100091952810140"
+        ],
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "18:00",
+            "closes": "05:00"
+          }
+        ]
+      }
+    </script>
+
+    <style>
+      /* ─────────────────────────────────────────────────────────────────────
+         Everything here is inline and dependency-free so that it paints on the
+         very first pass, before a single byte of CSS or JS has arrived. The
+         React intro then fades in over the top and removes it.
+
+         Without this, First Contentful Paint waits for ~140kB of JavaScript to
+         download, parse and mount — which on a throttled phone is over two
+         seconds of a blank screen.
+         ───────────────────────────────────────────────────────────────────── */
+      html, body { margin: 0; background: #090909; }
+      #root { min-height: 100vh; }
+
+      /* ── Plate geometry — the single source of truth ────────────────────────
+         Declared here, in the document head, because two things need it before
+         the stylesheet exists: the static hero still below, and the theatre's
+         .plate-frame in components/theatre/stage.css, which consumes these same
+         variables. Defining the box twice is how the still ends up half a pixel
+         off the video it is standing in for. */
+      :root {
+        --plate-w: min(94vw, 1520px);
+        --plate-h: min(80dvh, 53vw);
+        --plate-top: auto;
+        --plate-fit: contain;
+      }
+      @media (max-width: 900px) {
+        :root {
+          --plate-w: 100vw;
+          --plate-h: min(42dvh, 76vw);
+          --plate-top: 8dvh;
+          --plate-fit: cover;
+        }
+      }
+      @media (max-width: 900px) and (orientation: landscape) {
+        :root { --plate-w: 96vw; --plate-h: 74dvh; --plate-top: auto; --plate-fit: contain; }
+      }
+
+      /* The hero's first frame, painted from plain HTML so that the Largest
+         Contentful Paint does not have to wait for React to mount a <video>.
+         Removed by the theatre the moment the real clip has decoded. */
+      #hero-still {
+        position: fixed;
+        inset: 0;
+        margin: auto;
+        width: var(--plate-w);
+        height: var(--plate-h);
+        object-fit: var(--plate-fit);
+        z-index: 1;
+        pointer-events: none;
+        transition: opacity 400ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      #hero-still[data-off] { opacity: 0; }
+      @media (max-width: 900px) {
+        #hero-still { inset: var(--plate-top) 0 auto 0; margin: 0; }
+      }
+
+      #boot {
+        position: fixed;
+        inset: 0;
+        /* Below the React intro's own veil (z-index 100 → .z-veil), so when the
+           intro mounts it simply covers this and the removal is never seen. */
+        z-index: 90;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.25rem;
+        /* Nearly opaque: the hero still underneath is meant to read as a warm
+           suggestion of the product, not as a picture. */
+        background:
+          radial-gradient(ellipse 50% 44% at 50% 46%, rgba(200, 155, 60, 0.13), transparent 70%),
+          rgba(9, 9, 9, 0.93);
+        transition: opacity 320ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      #boot[data-off] { opacity: 0; }
+      #boot p {
+        margin: 0;
+        font-family: Manrope, system-ui, -apple-system, sans-serif;
+        font-weight: 800;
+        font-size: 0.86rem;
+        letter-spacing: 0.16em;
+        color: #f7ead7;
+        opacity: 0.62;
+      }
+      #boot div {
+        width: min(60vw, 18rem);
+        height: 1px;
+        overflow: hidden;
+        background: rgba(247, 234, 215, 0.1);
+      }
+      #boot i {
+        display: block;
+        height: 100%;
+        width: 100%;
+        transform-origin: left;
+        background: linear-gradient(90deg, #a9683a, #c89b3c, #f7ead7);
+        animation: boot-bar 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      }
+      @keyframes boot-bar {
+        0%   { transform: scaleX(0); }
+        60%  { transform: scaleX(0.72); }
+        100% { transform: scaleX(1); opacity: 0.3; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #boot i { animation: none; transform: scaleX(0.4); }
+      }
+    </style>
+  </head>
+  <body>
+    <img
+      id="hero-still"
+      src="/media/poster/signature-chai.webp"
+      alt=""
+      aria-hidden="true"
+      fetchpriority="high"
+      decoding="sync"
+    />
+
+    <div id="root"></div>
+
+    <!-- First paint. Replaced by the animated intro as soon as React mounts. -->
+    <div id="boot" aria-hidden="true">
+      <p>MR.CHAIWALA</p>
+      <div><i></i></div>
+    </div>
+    <noscript>
+      <div style="padding:4rem 1.5rem;color:#F7EAD7;font-family:system-ui,sans-serif;max-width:44rem">
+        <h1 style="font-weight:300;font-size:2rem">Mr. Chaiwala</h1>
+        <p>164 Port Road, Hindmarsh SA 5007 · 0422 372 222</p>
+        <p>Open every night, 6:00 PM — 5:00 AM. <a style="color:#C89B3C" href="/menu/">View the menu</a></p>
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

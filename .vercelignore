@@ -1,0 +1,10 @@
+# Vercel builds from source, so the compiled output never needs uploading.
+dist
+dist-ssr
+node_modules
+*.tsbuildinfo
+.DS_Store
+
+# 74 MB of original camera footage. Only scripts/media.sh consumes these, and
+# that runs locally to produce public/media — which IS committed and uploaded.
+assets

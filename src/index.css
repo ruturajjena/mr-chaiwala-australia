@@ -1,0 +1,131 @@
+@import './fonts.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Driven by the master timeline — every ambient light in the theatre reads
+       from here, so one write re-grades the entire screen. */
+    --accent: #c89b3c;
+    --accent-soft: rgba(200, 155, 60, 0.4);
+    --bloom: 0.55;
+  }
+
+  * { min-width: 0; }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scrollbar-width: none;
+  }
+  html::-webkit-scrollbar { display: none; }
+
+  body {
+    @apply bg-ink font-sans text-cream antialiased;
+    text-rendering: optimizeLegibility;
+    font-synthesis-weight: none;
+    overflow-x: clip;
+  }
+
+  /* Lenis owns the scroll position; these are its required hooks. */
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .lenis.lenis-stopped { overflow: hidden; }
+
+  ::selection { background: var(--accent); color: #090909; }
+
+  :focus-visible {
+    outline: 1px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  /* The real cursor is replaced by <Cursor/> on fine-pointer devices. */
+  html.has-custom-cursor,
+  html.has-custom-cursor * { cursor: none !important; }
+
+  img, video { display: block; max-width: 100%; }
+
+  /* The menu search has its own "Clear" control; hide the browser's. */
+  input[type='search']::-webkit-search-cancel-button,
+  input[type='search']::-webkit-search-decoration { -webkit-appearance: none; appearance: none; }
+
+  h1, h2, h3 { @apply font-display font-light; text-wrap: balance; }
+  p { text-wrap: pretty; }
+}
+
+@layer components {
+  .shell { @apply mx-auto w-full max-w-shell px-gutter; }
+
+  .eyebrow {
+    @apply font-sans text-eyebrow font-semibold uppercase;
+    letter-spacing: 0.34em;
+  }
+
+  .num { @apply font-mono tabular-nums; font-feature-settings: 'ss01'; }
+
+  /* Warm, low-contrast glass. Two layers of light rather than a flat white
+     wash, so it reads as thick glass instead of a translucent rectangle. */
+  .glass {
+    background:
+      linear-gradient(150deg, rgba(247, 234, 215, 0.075), rgba(247, 234, 215, 0.018) 42%, rgba(9, 9, 9, 0.16));
+    backdrop-filter: blur(22px) saturate(135%);
+    -webkit-backdrop-filter: blur(22px) saturate(135%);
+    border: 1px solid rgba(247, 234, 215, 0.1);
+    box-shadow:
+      inset 0 1px 0 rgba(247, 234, 215, 0.14),
+      inset 0 -1px 0 rgba(9, 9, 9, 0.35),
+      0 24px 70px -30px rgba(0, 0, 0, 0.9);
+  }
+
+  .hairline { @apply bg-cream/10; }
+
+  /* Applied by useSplitReveal before SplitType runs, to avoid a flash of
+     unsplit text at full opacity. */
+  .split-pending { opacity: 0; }
+
+  .line-mask { overflow: hidden; display: block; }
+}
+
+@layer utilities {
+  .gpu { transform: translateZ(0); will-change: transform; }
+  .dvh { height: 100vh; height: 100dvh; }
+  .min-dvh { min-height: 100vh; min-height: 100dvh; }
+
+  .text-gradient-gold {
+    background: linear-gradient(178deg, #f7ead7 4%, #e2c281 42%, #a9683a 96%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+}
+
+/*
+ * The only looping animation left on the site.
+ *
+ * Everything else — video, masks, particles, light, type, parallax — is a pure
+ * function of scroll position and stops dead when the visitor does. Film grain
+ * is the deliberate exception: it carries no information and reads as a
+ * property of the image rather than as motion, and freezing it would make the
+ * page look like a paused video rather than a still frame.
+ */
+@keyframes grain {
+  0%   { transform: translate3d(0, 0, 0); }
+  16%  { transform: translate3d(-6%, -4%, 0); }
+  33%  { transform: translate3d(5%, -6%, 0); }
+  50%  { transform: translate3d(-5%, 6%, 0); }
+  66%  { transform: translate3d(6%, 3%, 0); }
+  83%  { transform: translate3d(-3%, -3%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
